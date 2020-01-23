@@ -1,0 +1,16 @@
+#body {
+    /*background: #f9f9f9;*/
+    margin-bottom: 4em;
+}
+
+footer{
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #343A40;
+    color: white;
+    margin-top: 1em;
+}
+

@@ -1,0 +1,10 @@
+.alert-pers{
+    display: block;
+    position: absolute;
+    margin-top: -7em !important;
+}
+
+.clear-fixed{
+    float: none;
+    clear: both;
+}
