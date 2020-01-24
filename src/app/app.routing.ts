@@ -9,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StationComponent } from './components/station/station.component';
 import { ErrorComponent } from './components/error/error.component';
+import { SensorsComponent } from './components/sensors/sensors.component';
+import { HistoryComponent } from './components/history/history.component';
 
 import { IdentityGuard } from './services/identity.guard';
 
@@ -17,13 +19,15 @@ import { IdentityGuard } from './services/identity.guard';
 const appRoutes: Routes = [
 
     {path: '', component: HomeComponent},
-    {path: 'inicio', component: HomeComponent},
+    {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'stations', component: StationComponent, canActivate: [IdentityGuard]},
+    {path: 'station/:id', component: SensorsComponent, canActivate: [IdentityGuard]},
+    {path: 'history/:id', component: HistoryComponent, canActivate: [IdentityGuard]},
     {path: 'logout/:sure', component: LoginComponent},
-    {path: 'error', component: ErrorComponent, canActivate: [IdentityGuard]},
-    {path: '**', component: ErrorComponent, canActivate: [IdentityGuard]}
+    {path: 'error', component: ErrorComponent},
+    {path: '**', component: ErrorComponent}
 ];
 
 //exportar configuracion

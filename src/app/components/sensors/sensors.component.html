@@ -1,0 +1,132 @@
+<h1 class="text-center">Estaciones</h1>
+<hr>
+<div class="loading" *ngIf="!sensors">
+    <div id="text_animation">
+        <h6>Cargando</h6>
+    </div>
+    <br>
+    <div id="preloader_1">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+</div>
+<div class="container mt-2 pt-2">
+    <div class="row">
+        <div class="col-sm-3 mt-2" *ngFor="let sensor of sensors; let indice = index">
+            <div class="card text-center border-dark">
+                <img src="../../../assets/img/gray.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-capitalize">{{sensor.name | replaceUnderscore}}</h5>
+                    <p class="card-text">Valor minimo establecido:
+                        <strong *ngIf="sensor.minValue!=null">{{sensor.minValue}}</strong>
+                        <strong *ngIf="sensor.minValue==null">No configurado</strong>
+                    </p>
+                    <p class="card-text">Valor maximo establecido:
+                        <strong *ngIf="sensor.maxValue!=null">{{sensor.maxValue}}</strong>
+                        <strong *ngIf="sensor.maxValue==null">No configurado</strong>
+                    </p>
+                    <p class="card-text" *ngFor="let d of data">
+                        <strong *ngIf="d.SensorId == sensor.id">Valor: {{d.Value}}</strong>
+                    </p>
+                    <a data-toggle="modal" data-toggle="modal" [attr.data-target]="'#myModal'+sensor.id"
+                        class="btn btn-outline-dark mr-2">Info</a>
+                    <a [routerLink]="['/station/']" class="btn btn-outline-info">Configuracion</a>
+                </div>
+                <div *ngFor="let d of data">
+                    <div class="card-footer" *ngIf="d.SensorId == sensor.id">
+                        <small class="text-muted">{{d.Date | amLocale:'es' | amTimeAgo}}</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Modal -->
+            <div class="modal" id="{{ 'myModal' + sensor.id}}">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 text-capitalize">{{sensor.name | replaceUnderscore}}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+
+                            <!--Panel de datos-->
+                            <div *ngFor="let d of data">
+                                <div *ngIf="d.SensorId==sensor.id">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="card w-50 text-center  border-succes mb-2">
+
+                                            <div class="card-header w-100">Informacion sobre el sensor</div>
+                                            <div class="card-body">
+
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item border border-success bg-success rounded"
+                                                        *ngIf="sensor.minValue<d.Value && sensor.maxValue > d.Value">
+                                                        Estado: "Correcto"
+                                                        <br>
+                                                        Valor: {{d.Value}}
+                                                    </li>
+
+                                                    <li class="list-group-item border border-warning bg-warning rounded"
+                                                        *ngIf="sensor.minValue>d.Value && sensor.maxValue > d.Value">
+                                                        Estado: "Precaucion"
+                                                        <br>
+                                                        Valor: {{d.Value}}
+                                                    </li>
+
+                                                    <li class="list-group-item border border-danger bg-danger rounded text-light"
+                                                        *ngIf="d.Value>sensor.minValue && d.Value > sensor.maxValue && sensor.minValue!=null && sensor.maxValue!=null">
+                                                        Estado: "Peligro"
+                                                        <br>
+                                                        Valor: {{d.Value}}
+                                                    </li>
+
+                                                    <li class="list-group-item border border-secondary bg-secondary rounded"
+                                                        *ngIf="!sensor.minValue && !sensor.maxValue">
+                                                        Estado: "No configurado"
+                                                        <br>
+                                                        <a href="">Configurar</a>
+                                                        <br>
+                                                        Valor: {{d.Value}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <a class="btn btn-outline-success mr-2"
+                                        [routerLink]="['/history',sensor.id]"
+                                        data-dismiss="modal">
+                                            Historial
+                                        </a>
+
+                                        <a class="btn btn-outline-info"
+                                        data-dismiss="modal"
+                                        [routerLink]="['/history',sensor.id]">
+                                            Tiempo real
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

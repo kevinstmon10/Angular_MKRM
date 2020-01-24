@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { routing, appRoutingProviders} from './app.routing';
+import { MomentModule } from 'angular2-moment';
 
 import { AppComponent } from './app.component';
 
@@ -15,6 +16,9 @@ import { StationComponent } from './components/station/station.component';
 import { IdentityGuard } from './services/identity.guard';
 import { UserService } from './services/user.service';
 import { ErrorComponent } from './components/error/error.component';
+import { ReplaceUnderscorePipe } from './pipes/replace-underscore.pipe';
+import { SensorsComponent } from './components/sensors/sensors.component';
+import { HistoryComponent } from './components/history/history.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +27,17 @@ import { ErrorComponent } from './components/error/error.component';
     LoginComponent,
     RegisterComponent,
     StationComponent,
-    ErrorComponent
+    ErrorComponent,
+    ReplaceUnderscorePipe,
+    SensorsComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MomentModule
   ],
   providers: [
     appRoutingProviders,

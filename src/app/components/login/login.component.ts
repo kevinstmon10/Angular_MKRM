@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('token', this.token);
 
                   //reedireccion al index 
-                  this._router.navigate(['inicio']);
+                  this._router.navigate(['home']);
                 }else{
                   console.log('error');
                 }
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
           this.identity = null;
           this.token = null;
 
-          this._router.navigate(['inicio']);
+          this._router.navigate(['home']);
         }else{
 
         }
