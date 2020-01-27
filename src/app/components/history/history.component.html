@@ -1,9 +1,111 @@
-<h1 class="text-center">Estaciones</h1>
-<hr>
+<div class="bg-light">
+    <h3 class=" text-center text-capitalize">{{title | replaceUnderscore}}</h3>
+    <hr>
+</div>
 
+<div class="loading" *ngIf="!sensor || !datas">
+    <div id="text_animation">
+        <h6>Cargando</h6>
+    </div>
+    <br>
+    <div id="preloader_1">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+</div>
 <div class="container-fluid">
 
-    <div class="d-flex justify-content-center mt-2">
-        
+    <!----TODO---->
+    <div class="row">
+        <div class="col-8">
+            <div class="">
+              <chart style="width: 100%; display: block" type="StockChart" [options]="options"></chart>
+                
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="table-responsive" style="height: 400px; display: block">
+                <table class="table table-hover text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let d of Datas; let indice = index">
+                            <th scope="row">{{indice+1}}</th>
+                            <td>{{d.value}}</td>
+                            <td>{{d.date | amLocale:'es' | amTimeAgo}}</td>
+                            <!---Valor recomendado-->
+                            <td class="table-success" *ngIf="sensor.minValue<=d.value && sensor.maxValue >= d.value">
+                                Correcto
+                            </td>
+                            <!---Valor recomendado-->
+                            <!---Valor Precaucion-->
+                            <td class="table-warning" *ngIf="sensor.minValue>d.value && sensor.maxValue > d.value">
+                                Precaucion
+                            </td>
+                            <!---Valor Precaucion-->
+                            <!---Valor Peligro-->
+                            <td class="table-danger"
+                                *ngIf="d.value>sensor.minValue && d.value > sensor.maxValue && sensor.minValue!=null && sensor.maxValue!=null">
+                                Peligro
+                            </td>
+                            <!---Valor Peligro-->
+                            <!---Valor No Configurado-->
+                            <td class="table-secondary" *ngIf="!sensor.minValue && !sensor.maxValue">
+                                No Configurado
+                            </td>
+                            <!---Valor No Configurado-->
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!----TODO---->
+
     </div>
+
+    <div class="row mt-2 pl-2 pr-2">
+        <div class="col d-flex justify-content-center">
+            <!----DIV CON Input del valor limite minimo ---->
+            <form class="text-center mr-2 form-min-max" #update="ngForm" (ngSubmit)="onUpdate(update)">
+                <div class="form-group">
+                    <span>Valor Minimo</span>
+                    <input class="mb-2 border form-control" min="0" [max]="sensor.maxValue - 1" name="min" type="number"
+                        #minValue="ngModel" [(ngModel)]="sensor.minValue" />
+                    <input class="btn btn-outline-warning rounded btn-sm" type="submit" value="Actualizar"
+                        *ngIf="sensor.maxValue <= sensor.minValue || sensor.minValue < 0" disabled>
+                    <input class="btn btn-outline-warning rounded btn-sm" type="submit" value="Actualizar"
+                        *ngIf="sensor.maxValue > sensor.minValue && sensor.minValue >= 0">
+                </div>
+            </form>
+            <!----DIV CON Input del valor limite minimo ---->
+
+            <!----DIV CON Input del valor limite maximo ---->
+            <form class="text-center ml-2 form-min-max" #update="ngForm" (ngSubmit)="onUpdate(update)">
+                <div class="form-group">
+                    <span>Valor Maximo</span>
+                    <input class="mb-2 border form-control" [min]="sensor.minValue + 1 " name="max" type="number"
+                        #maxValue="ngModel" [(ngModel)]="sensor.maxValue" />
+                    <input class="btn btn-outline-danger rounded btn-sm" type="submit" value="Actualizar"
+                        *ngIf="sensor.maxValue <= sensor.minValue" disabled>
+                    <input class="btn btn-outline-danger rounded btn-sm" type="submit" value="Actualizar"
+                        *ngIf="sensor.maxValue > sensor.minValue">
+                </div>
+            </form>
+            <!----DIV CON Input del valor limite maximo ---->
+        </div>
+    </div>
+
 </div>

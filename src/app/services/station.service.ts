@@ -32,11 +32,34 @@ export class StationService {
         return this._http.get(this.url+'stations/'+id+'/sensors', {headers: headers});
     }
 
-    getLastData(id, token):Observable<any>{
+    getSensor(id, token): Observable<any>{
         let headers = new HttpHeaders().set('Content-type', 'application/x-www-formurlencoded')
         .set('Authorization', token);
 
         return this._http.get(this.url+'sensor/'+id, {headers: headers});
+    }
+
+    getLastData(id, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-formurlencoded')
+        .set('Authorization', token);
+
+        return this._http.get(this.url+'sensor/'+id+'/last', {headers: headers});
+    }
+
+    getHistoyData(id, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-formurlencoded')
+        .set('Authorization', token);
+
+        ///especial para highcharts
+        return this._http.get(this.url+'historial/sensor/'+id, {headers: headers});
+    }
+
+    getTenData(id, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-formurlencoded')
+        .set('Authorization', token);
+
+        ///especial para highcharts
+        return this._http.get(this.url+'last_ten/sensor/'+id, {headers: headers});
     }
 
 }

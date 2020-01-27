@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { routing, appRoutingProviders} from './app.routing';
 import { MomentModule } from 'angular2-moment';
+import { ChartModule } from 'angular2-highstock';
 
 import { AppComponent } from './app.component';
 
@@ -37,7 +38,9 @@ import { HistoryComponent } from './components/history/history.component';
     routing,
     HttpClientModule,
     FormsModule,
-    MomentModule
+    MomentModule,
+    ChartModule
+      
   ],
   providers: [
     appRoutingProviders,
