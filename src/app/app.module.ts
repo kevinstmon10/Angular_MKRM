@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { routing, appRoutingProviders} from './app.routing';
 import { MomentModule } from 'angular2-moment';
-import { ChartModule } from 'angular2-highstock';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 import { AppComponent } from './app.component';
 
@@ -20,6 +20,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { ReplaceUnderscorePipe } from './pipes/replace-underscore.pipe';
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { HistoryComponent } from './components/history/history.component';
+import { RealtimeComponent } from './components/realtime/realtime.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HistoryComponent } from './components/history/history.component';
     ErrorComponent,
     ReplaceUnderscorePipe,
     SensorsComponent,
-    HistoryComponent
+    HistoryComponent,
+    RealtimeComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { HistoryComponent } from './components/history/history.component';
     HttpClientModule,
     FormsModule,
     MomentModule,
-    ChartModule
+    HighchartsChartModule
       
   ],
   providers: [

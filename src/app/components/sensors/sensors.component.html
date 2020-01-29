@@ -34,8 +34,8 @@
                         <strong *ngIf="d.SensorId == sensor.id">Valor: {{d.Value}}</strong>
                     </p>
                     <a data-toggle="modal" data-toggle="modal" [attr.data-target]="'#myModal'+sensor.id"
-                        class="btn btn-outline-dark mr-2">Info</a>
-                    <a [routerLink]="['/station/']" class="btn btn-outline-info">Configuracion</a>
+                        class="btn btn-outline-info">Informacion</a>
+                   <!-- <a [routerLink]="['/station/']" class="btn btn-outline-dark mr-2">Configuracion</a>-->
                 </div>
                 <div *ngFor="let d of data">
                     <div class="card-footer" *ngIf="d.SensorId == sensor.id">
@@ -111,7 +111,7 @@
 
                                         <a class="btn btn-outline-info"
                                         data-dismiss="modal"
-                                        [routerLink]="['/history',sensor.id]">
+                                        [routerLink]="['/realtime',sensor.id]">
                                             Tiempo real
                                         </a>
                                     </div>

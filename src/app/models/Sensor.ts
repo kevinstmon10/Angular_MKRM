@@ -3,8 +3,8 @@ export class Sensor {
         public id: number,
         public name: string,
         public status: string,
-        public min_value: string,
-        public max_value: string,
+        public minValue: string,
+        public maxValue: string,
         public stationid: string
     ){}
 }

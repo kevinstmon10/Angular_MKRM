@@ -28,6 +28,8 @@
                 <highcharts-chart [Highcharts]="Highcharts" 
                 [constructorType]="chartConstructor"
                 [options]="chartOptions"
+                [(update)]="updateFlag"
+                [callbackFunction]="chartCallback"
                     style="width: 100%; display: block"></highcharts-chart>
             </div>
         </div>

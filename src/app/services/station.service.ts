@@ -39,6 +39,15 @@ export class StationService {
         return this._http.get(this.url+'sensor/'+id, {headers: headers});
     }
 
+    updateSensor(id, sensor, token): Observable<any>{
+        let json = JSON.stringify(sensor);
+        let params = 'json='+json;
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
+                                        .set('Authorization', token);
+
+        return this._http.put(this.url+'sensor/'+id, params, {headers: headers});
+    }
+
     getLastData(id, token):Observable<any>{
         let headers = new HttpHeaders().set('Content-type', 'application/x-www-formurlencoded')
         .set('Authorization', token);
@@ -53,7 +62,23 @@ export class StationService {
         ///especial para highcharts
         return this._http.get(this.url+'historial/sensor/'+id, {headers: headers});
     }
+    /* Grafica de tiempo real */
+    getRealTimeDefaultData(id, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-formurlencoded')
+        .set('Authorization', token);
 
+        ///especial para highcharts
+        return this._http.get(this.url+'tr/sensor/'+id+'&default', {headers: headers});
+    }
+    getRealTimeDefault1(id, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-formurlencoded')
+        .set('Authorization', token);
+
+        ///especial para highcharts
+        return this._http.get(this.url+'tr/sensor/'+id+'&1', {headers: headers});
+    }
+
+    /* Grafica de tiempo real */
     getTenData(id, token):Observable<any>{
         let headers = new HttpHeaders().set('Content-type', 'application/x-www-formurlencoded')
         .set('Authorization', token);

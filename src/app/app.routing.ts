@@ -11,6 +11,7 @@ import { StationComponent } from './components/station/station.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { HistoryComponent } from './components/history/history.component';
+import { RealtimeComponent } from './components/realtime/realtime.component';
 
 import { IdentityGuard } from './services/identity.guard';
 
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     {path: 'stations', component: StationComponent, canActivate: [IdentityGuard]},
     {path: 'station/:id', component: SensorsComponent, canActivate: [IdentityGuard]},
     {path: 'history/:id', component: HistoryComponent, canActivate: [IdentityGuard]},
+    {path: 'realtime/:id', component: RealtimeComponent, canActivate: [IdentityGuard]},
     {path: 'logout/:sure', component: LoginComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', component: ErrorComponent}
